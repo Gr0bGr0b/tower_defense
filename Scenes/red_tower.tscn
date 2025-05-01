@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://7crfo5tq0mv0"]
+
+[ext_resource type="PackedScene" uid="uid://btwbwr3eqfjk8" path="res://Scenes/tower.tscn" id="1_ldf1b"]
+[ext_resource type="Texture2D" uid="uid://c0rosbt6kix3e" path="res://Assets/Factions/Goblins/Buildings/Wood_House/Goblin_House.png" id="2_d2h14"]
+
+[node name="RedTower" instance=ExtResource("1_ldf1b")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_d2h14")
+offset = Vector2(2.08165e-12, -64)

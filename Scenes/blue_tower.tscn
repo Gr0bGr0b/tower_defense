@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://pnsm65w5j06f"]
+
+[ext_resource type="PackedScene" uid="uid://btwbwr3eqfjk8" path="res://Scenes/tower.tscn" id="1_f7ub7"]
+[ext_resource type="Texture2D" uid="uid://h4k85ljm2nqe" path="res://Assets/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="2_40qml"]
+
+[node name="BlueTower" instance=ExtResource("1_f7ub7")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_40qml")

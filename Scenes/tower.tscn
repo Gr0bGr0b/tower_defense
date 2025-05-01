@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://btwbwr3eqfjk8"]
+
+[node name="Tower" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+offset = Vector2(2.08165e-12, -96)
