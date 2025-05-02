@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Levels/Level_1.gd" id="1_8hrue"]
 [ext_resource type="Texture2D" uid="uid://77cbry656q5a" path="res://Assets/Tilemap_Flat.png" id="1_qg383"]
-[ext_resource type="PackedScene" uid="uid://pnsm65w5j06f" path="res://Scenes/blue_tower.tscn" id="2_5ym7g"]
-[ext_resource type="PackedScene" uid="uid://7crfo5tq0mv0" path="res://Scenes/red_tower.tscn" id="3_d5e80"]
+[ext_resource type="PackedScene" uid="uid://pnsm65w5j06f" path="res://Scenes/p_tower.tscn" id="2_5ym7g"]
+[ext_resource type="PackedScene" uid="uid://7crfo5tq0mv0" path="res://Scenes/e_tower.tscn" id="3_d5e80"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt8xe"]
 texture = ExtResource("1_qg383")
@@ -544,16 +544,19 @@ tile_set = SubResource("TileSet_61yiu")
 format = 2
 layer_0/tile_data = PackedInt32Array(458752, 393216, 0, 458753, 393216, 0, 458754, 393216, 0, 458755, 393216, 0, 458756, 393216, 0, 458757, 393216, 0, 458758, 393216, 0, 458759, 393216, 0, 458760, 393216, 0, 458761, 393216, 0, 458762, 393216, 0, 458763, 393216, 0, 458764, 393216, 0, 458765, 393216, 0, 458766, 393216, 0, 524288, 65536, 0, 524289, 65536, 0, 524290, 65536, 0, 524291, 65536, 0, 524292, 65536, 0, 524293, 65536, 0, 524294, 65536, 0, 524295, 65536, 0, 524296, 65536, 0, 524297, 65536, 0, 524298, 65536, 0, 524299, 65536, 0, 524300, 65536, 0, 524301, 65536, 0, 524302, 65536, 0, 393230, 65536, 0, 393229, 65536, 0, 393228, 65536, 0, 393227, 65536, 0, 393226, 65536, 0, 393225, 65536, 0, 393224, 65536, 0, 393223, 65536, 0, 393222, 65536, 0, 393221, 65536, 0, 393220, 65536, 0, 393219, 65536, 0, 393218, 65536, 0, 393217, 65536, 0, 393216, 65536, 0)
 
-[node name="BlueTower" parent="World" instance=ExtResource("2_5ym7g")]
-position = Vector2(64, 480)
+[node name="Enemies" type="Node2D" parent="World"]
 
-[node name="RedTower" parent="World" instance=ExtResource("3_d5e80")]
+[node name="EnemiesTower" parent="World/Enemies" instance=ExtResource("3_d5e80")]
 position = Vector2(896, 480)
 
-[node name="BlueUnitsContainer" type="Node2D" parent="World"]
-position = Vector2(64, 480)
+[node name="Soldiers" type="Node2D" parent="World"]
 
-[node name="RedUnitsContainer" type="Node2D" parent="World"]
+[node name="BlueTower" parent="World/Soldiers" instance=ExtResource("2_5ym7g")]
+position = Vector2(64, 480)
+script = null
+
+[node name="UnitsContainer" type="Node2D" parent="World/Soldiers"]
+position = Vector2(64, 480)
 
 [node name="LevelCanvas" type="CanvasLayer" parent="."]
 
@@ -564,6 +567,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PawnBtn" type="Button" parent="LevelCanvas/UI"]
+layout_mode = 0
 offset_left = 377.0
 offset_top = 584.0
 offset_right = 439.0

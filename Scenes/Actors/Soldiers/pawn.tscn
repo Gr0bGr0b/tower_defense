@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdgjf7l0v6a5t"]
+
+[ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_eqwi0"]
+[ext_resource type="Script" path="res://Scripts/Actors/Soldiers/pawn.gd" id="2_82bo1"]
+[ext_resource type="Texture2D" uid="uid://cj5ycqc8niayc" path="res://Assets/Factions/Knights/Pawn_Blue.png" id="3_npew1"]
+[ext_resource type="Script" path="res://Scripts/Actors/Move.gd" id="4_mlibu"]
+[ext_resource type="Script" path="res://Scripts/Actors/Attack.gd" id="5_eps5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2x2ss"]
+size = Vector2(32, 24)
+
+[sub_resource type="Animation" id="Animation_1oi6m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jpeqp"]
+resource_name = "move"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_vqruu"]
+resource_name = "Attack"
+length = 1.20001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3mnml"]
+_data = {
+"Attack": SubResource("Animation_vqruu"),
+"Move": SubResource("Animation_jpeqp"),
+"RESET": SubResource("Animation_1oi6m")
+}
+
+[node name="Pawn" instance=ExtResource("1_eqwi0")]
+script = ExtResource("2_82bo1")
+damage = 2
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_npew1")
+offset = Vector2(2.08165e-12, -26)
+hframes = 6
+vframes = 6
+frame = 1
+
+[node name="Move" type="Node2D" parent="StateMachine" index="0"]
+script = ExtResource("4_mlibu")
+
+[node name="Attack" type="Node2D" parent="StateMachine" index="1"]
+script = ExtResource("5_eps5m")
+
+[node name="Area2D" parent="." index="2"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(40, -16)
+shape = SubResource("RectangleShape2D_2x2ss")
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_3mnml")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

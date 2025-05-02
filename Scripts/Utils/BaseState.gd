@@ -12,7 +12,7 @@ func _ready() -> void:
 	states = get_parent().states
 
 func enter() -> void:
-	actor.animation = animation_name
+	actor.set_animation(animation_name)
 
 func exit() -> void:
 	pass

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://7crfo5tq0mv0"]
+
+[ext_resource type="PackedScene" uid="uid://btwbwr3eqfjk8" path="res://Scenes/tower.tscn" id="1_ldf1b"]
+[ext_resource type="Texture2D" uid="uid://c0rosbt6kix3e" path="res://Assets/Factions/Goblins/Buildings/Wood_House/Goblin_House.png" id="2_d2h14"]
+[ext_resource type="Script" path="res://Scripts/Enemies/e_tower.gd" id="2_ygf76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abnrq"]
+size = Vector2(96, 128)
+
+[node name="EnemiesTower" instance=ExtResource("1_ldf1b")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_ygf76")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_d2h14")
+offset = Vector2(2.08165e-12, -64)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_abnrq")
+debug_color = Color(0.643137, 0.0941176, 0.0901961, 0.419608)
