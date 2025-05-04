@@ -13,10 +13,11 @@ func _ready():
 
 ######## EMITS ########
 
-func _on_area_entered(node: Area2D) -> void:
+func _on_atk_area_entered(node: Area2D) -> void:
 	if node.is_in_group("Enemies"):
 		set_target(node)
 		state_machine.change_state(state_machine.states.Attack)
 
-func _on_area_exited() -> void:
+func _on_atk_area_exited(node: Area2D) -> void:
 	set_target(null)
+	state_machine.change_state(state_machine.states.Move)

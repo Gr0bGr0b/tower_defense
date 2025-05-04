@@ -7,3 +7,18 @@
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_40qml")
+
+[node name="Control" parent="." index="2"]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="HealthBar" parent="Control" index="0"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -50.0
+offset_top = -215.0
+offset_right = 50.0
+offset_bottom = -185.0
+grow_vertical = 1

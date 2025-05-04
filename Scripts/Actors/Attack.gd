@@ -1,11 +1,12 @@
 extends BaseState
 
+@export var wait_time : float = 1.0
 @onready var attack_timer : Timer = Timer.new()
 
 func _ready() -> void:
 	super()
 	add_child(attack_timer)
-	attack_timer.set_wait_time(2.0)
+	attack_timer.set_wait_time(wait_time)
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
 func enter() -> void:
@@ -16,7 +17,8 @@ func enter() -> void:
 ######## LOGIC ########
 
 func _attack() -> void:
-	actor.get_target().hit(actor.damage)
+	if actor.get_target() != null:
+		actor.get_target().hit(actor.damage)
 
 ######## EMITS ########
 

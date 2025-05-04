@@ -3,7 +3,7 @@ extends Node2D
 
 
 @onready var state_machine	 	= $StateMachine
-@onready var area_detection		= $Area2D
+@onready var atk_area_detection		= $AttackArea2D
 @onready var animation_player	= $AnimationPlayer
 @onready var sprite 			= $Sprite2D
 
@@ -46,8 +46,8 @@ func _ready() -> void:
 	self.animation_changed.connect(_on_animation_changed)
 	state_machine.init(self)
 	
-	area_detection.connect("area_entered", Callable(self, "_on_area_entered"))
-	area_detection.connect("area_exited", Callable(self, "_on_area_exited"))
+	atk_area_detection.connect("area_entered", Callable(self, "_on_atk_area_entered"))
+	atk_area_detection.connect("area_exited", Callable(self, "_on_atk_area_exited"))
 
 func _physics_process(delta):
 	state_machine.physics_process(delta)

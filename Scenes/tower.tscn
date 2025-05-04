@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://btwbwr3eqfjk8"]
+[gd_scene load_steps=3 format=3 uid="uid://btwbwr3eqfjk8"]
 
 [ext_resource type="Script" path="res://Scripts/tower.gd" id="1_q1owl"]
+[ext_resource type="PackedScene" uid="uid://2hlt7labu6np" path="res://Scenes/UI/HealthBar.tscn" id="2_ilvdb"]
 
 [node name="Tower" type="Area2D"]
 script = ExtResource("1_q1owl")
@@ -10,3 +11,16 @@ position = Vector2(0, -1)
 offset = Vector2(2.08165e-12, -96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" parent="Control" instance=ExtResource("2_ilvdb")]
+layout_mode = 1
+offset_left = -63.0
+offset_top = -109.0
+offset_right = 37.0
+offset_bottom = -79.0
