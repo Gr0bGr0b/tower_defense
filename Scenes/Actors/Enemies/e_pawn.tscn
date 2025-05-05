@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvakdnf8ig7ev"]
+[gd_scene load_steps=7 format=3 uid="uid://bvakdnf8ig7ev"]
 
 [ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_6u1db"]
+[ext_resource type="Script" path="res://Scripts/Actors/Enemies/e_pawn.gd" id="2_7wiwt"]
 [ext_resource type="Texture2D" uid="uid://r0y1cvwltp5u" path="res://Assets/Factions/Goblins/Torch_Red.png" id="2_daor1"]
+[ext_resource type="Script" path="res://Scripts/Actors/Move.gd" id="3_tm237"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkstv"]
 size = Vector2(64, 64)
@@ -10,6 +12,9 @@ size = Vector2(64, 64)
 size = Vector2(20, 32)
 
 [node name="RedPawn" instance=ExtResource("1_6u1db")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_7wiwt")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_daor1")
@@ -17,6 +22,9 @@ offset = Vector2(2.08165e-12, -32)
 flip_h = true
 hframes = 7
 vframes = 5
+
+[node name="MoveState" type="Node2D" parent="StateMachine" index="0"]
+script = ExtResource("3_tm237")
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -32)
