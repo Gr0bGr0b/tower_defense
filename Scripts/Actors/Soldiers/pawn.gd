@@ -1,9 +1,6 @@
 extends Actor
 class_name PawnSoldier
 
-
-@export var damage : int = 2
-
 func _ready():
 	super()
 	add_to_group("Soldiers")

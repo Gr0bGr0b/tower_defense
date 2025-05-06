@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvakdnf8ig7ev"]
+[gd_scene load_steps=12 format=3 uid="uid://bvakdnf8ig7ev"]
 
 [ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_6u1db"]
-[ext_resource type="Script" path="res://Scripts/Actors/Enemies/e_pawn.gd" id="2_7wiwt"]
+[ext_resource type="Script" uid="uid://b8o8t3lu6t70" path="res://Scripts/Actors/Enemies/e_pawn.gd" id="2_7wiwt"]
 [ext_resource type="Texture2D" uid="uid://r0y1cvwltp5u" path="res://Assets/Factions/Goblins/Torch_Red.png" id="2_daor1"]
-[ext_resource type="Script" path="res://Scripts/Actors/Move.gd" id="3_tm237"]
+[ext_resource type="Script" uid="uid://b4ryccpq2ebqo" path="res://Scripts/Actors/Move.gd" id="3_tm237"]
+[ext_resource type="Script" uid="uid://iahy5ps5ok2u" path="res://Scripts/Actors/Attack.gd" id="5_6fj0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkstv"]
 size = Vector2(64, 64)
@@ -11,10 +12,68 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wv4tw"]
 size = Vector2(20, 32)
 
+[sub_resource type="Animation" id="Animation_5jhmo"]
+resource_name = "Attack"
+length = 1.20001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_pu3j2"]
+resource_name = "Move"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_brw8s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ysu1"]
+_data = {
+&"Attack": SubResource("Animation_5jhmo"),
+&"Move": SubResource("Animation_pu3j2"),
+&"RESET": SubResource("Animation_brw8s")
+}
+
 [node name="RedPawn" instance=ExtResource("1_6u1db")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_7wiwt")
+damage = 5
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_daor1")
@@ -22,9 +81,13 @@ offset = Vector2(2.08165e-12, -32)
 flip_h = true
 hframes = 7
 vframes = 5
+frame = 8
 
-[node name="MoveState" type="Node2D" parent="StateMachine" index="0"]
+[node name="Move" type="Node2D" parent="StateMachine" index="0"]
 script = ExtResource("3_tm237")
+
+[node name="Attack" type="Node2D" parent="StateMachine" index="1"]
+script = ExtResource("5_6fj0o")
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -32)
@@ -34,6 +97,11 @@ debug_color = Color(0.396078, 0.603922, 0.290196, 0.419608)
 [node name="CollisionShape2D" parent="AttackArea2D" index="0"]
 position = Vector2(-54, -32)
 shape = SubResource("RectangleShape2D_wv4tw")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_1ysu1")
+}
 
 [node name="HealthBar" parent="Control" index="0"]
 layout_mode = 1

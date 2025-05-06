@@ -8,12 +8,14 @@ extends Node2D
 @onready var sprite 			= $Sprite2D
 
 @export var speed : float =  150.0 
+@export var health: int = 20 : set = set_health, get = get_health
+@export var damage: int = 10
 
 signal animation_changed(anim: String)
 
 var animation : String = "" : set = set_animation, get = get_animation
 var direction : Vector2 = Vector2.ZERO: set = set_direction, get = get_direction
-var target = null : set = set_target, get = get_target
+var target= null : set = set_target, get = get_target
 
 ######## ACCESSORS ########
 
@@ -25,7 +27,6 @@ func set_animation(value) -> void:
 func get_animation() -> String:
 		return animation
 
-
 func set_direction(value) -> void:
 		if value != direction && value != Vector2.ZERO:
 			direction = value
@@ -34,12 +35,19 @@ func set_direction(value) -> void:
 func get_direction() -> Vector2:
 		return direction
 
-func set_target(value: Node2D) -> void:
+func set_target(value) -> void:
 	if value != target:
 		target = value
 
-func get_target() -> Node2D:
+func get_target():
 	return target
+	
+func set_health(value: int) -> void:
+	if health != value:
+		health = value
+
+func get_health() -> int:
+	return health
 
 ######## BUILT-IN ########
 func _ready() -> void:
@@ -57,7 +65,14 @@ func _physics_process(delta):
 func _process(delta):
 	state_machine.process(delta)
 	
+######## LOGIC ########
+
+func hit(damage: int) -> void:
+	set_health(get_health() - damage)
+	if get_health() <= 0:
+		queue_free()
+
+
 ######## SIGNALS ########
 func _on_animation_changed(anim: String):
 	animation_player.play(anim)
-

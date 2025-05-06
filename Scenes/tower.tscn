@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btwbwr3eqfjk8"]
 
-[ext_resource type="Script" path="res://Scripts/tower.gd" id="1_q1owl"]
+[ext_resource type="Script" uid="uid://cp81qotubbed1" path="res://Scripts/tower.gd" id="1_q1owl"]
 [ext_resource type="PackedScene" uid="uid://2hlt7labu6np" path="res://Scenes/UI/HealthBar.tscn" id="2_ilvdb"]
 
 [node name="Tower" type="Area2D"]

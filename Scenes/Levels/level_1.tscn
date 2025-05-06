@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://5b2rlrob6s1k"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/Level_1.gd" id="1_8hrue"]
+[ext_resource type="Script" uid="uid://bf118xloowjvx" path="res://Scripts/Levels/Level_1.gd" id="1_8hrue"]
 [ext_resource type="Texture2D" uid="uid://77cbry656q5a" path="res://Assets/Tilemap_Flat.png" id="1_qg383"]
 [ext_resource type="PackedScene" uid="uid://pnsm65w5j06f" path="res://Scenes/p_tower.tscn" id="2_5ym7g"]
 [ext_resource type="PackedScene" uid="uid://7crfo5tq0mv0" path="res://Scenes/e_tower.tscn" id="3_d5e80"]
-[ext_resource type="Script" path="res://Scripts/Enemies/EnemiesManager.gd" id="3_du6dt"]
+[ext_resource type="Script" uid="uid://b5lwd4fm6m04m" path="res://Scripts/Enemies/EnemiesManager.gd" id="3_du6dt"]
 [ext_resource type="PackedScene" uid="uid://bvakdnf8ig7ev" path="res://Scenes/Actors/Enemies/e_pawn.tscn" id="4_wakao"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt8xe"]
@@ -551,7 +551,7 @@ script = ExtResource("3_du6dt")
 units_scn = Array[PackedScene]([ExtResource("4_wakao")])
 
 [node name="SpawnTimer" type="Timer" parent="World/Enemies"]
-wait_time = 3.0
+wait_time = 10.17
 autostart = true
 
 [node name="EnemiesTower" parent="World/Enemies" instance=ExtResource("3_d5e80")]

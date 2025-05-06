@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdgjf7l0v6a5t"]
+[gd_scene load_steps=13 format=3 uid="uid://bdgjf7l0v6a5t"]
 
 [ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_eqwi0"]
-[ext_resource type="Script" path="res://Scripts/Actors/Soldiers/pawn.gd" id="2_82bo1"]
+[ext_resource type="Script" uid="uid://u76wwb642afn" path="res://Scripts/Actors/Soldiers/pawn.gd" id="2_82bo1"]
 [ext_resource type="Texture2D" uid="uid://cj5ycqc8niayc" path="res://Assets/Factions/Knights/Pawn_Blue.png" id="3_npew1"]
-[ext_resource type="Script" path="res://Scripts/Actors/Move.gd" id="4_mlibu"]
-[ext_resource type="Script" path="res://Scripts/Actors/Attack.gd" id="5_eps5m"]
+[ext_resource type="Script" uid="uid://b4ryccpq2ebqo" path="res://Scripts/Actors/Move.gd" id="4_mlibu"]
+[ext_resource type="Script" uid="uid://iahy5ps5ok2u" path="res://Scripts/Actors/Attack.gd" id="5_eps5m"]
+
+[sub_resource type="GDScript" id="GDScript_v8573"]
+script/source = "extends Sprite2D
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cpsj"]
 size = Vector2(64, 53)
@@ -64,14 +68,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3mnml"]
 _data = {
-"Attack": SubResource("Animation_vqruu"),
-"Move": SubResource("Animation_jpeqp"),
-"RESET": SubResource("Animation_1oi6m")
+&"Attack": SubResource("Animation_vqruu"),
+&"Move": SubResource("Animation_jpeqp"),
+&"RESET": SubResource("Animation_1oi6m")
 }
 
 [node name="Pawn" instance=ExtResource("1_eqwi0")]
 script = ExtResource("2_82bo1")
-damage = 100
+health = 30
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_npew1")
@@ -79,6 +83,7 @@ offset = Vector2(2.08165e-12, -26)
 hframes = 6
 vframes = 6
 frame = 1
+script = SubResource("GDScript_v8573")
 
 [node name="Move" type="Node2D" parent="StateMachine" index="0"]
 script = ExtResource("4_mlibu")
@@ -101,7 +106,7 @@ shape = SubResource("RectangleShape2D_2mcqx")
 
 [node name="AnimationPlayer" parent="." index="4"]
 libraries = {
-"": SubResource("AnimationLibrary_3mnml")
+&"": SubResource("AnimationLibrary_3mnml")
 }
 
 [node name="HealthBar" parent="Control" index="0"]

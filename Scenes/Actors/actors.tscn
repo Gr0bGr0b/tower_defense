@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmrothkjtqiqs"]
 
-[ext_resource type="Script" path="res://Scripts/Actors/Actor.gd" id="1_weqqk"]
-[ext_resource type="Script" path="res://Scripts/Utils/StateMachine.gd" id="2_fxatt"]
+[ext_resource type="Script" uid="uid://bwfwgwrvc1pf3" path="res://Scripts/Actors/Actor.gd" id="1_weqqk"]
+[ext_resource type="Script" uid="uid://bxauyts1amfxi" path="res://Scripts/Utils/StateMachine.gd" id="2_fxatt"]
 [ext_resource type="PackedScene" uid="uid://2hlt7labu6np" path="res://Scenes/UI/HealthBar.tscn" id="3_j5qiq"]
 
 [node name="Actors" type="CharacterBody2D"]

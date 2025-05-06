@@ -1,4 +1,5 @@
 extends BaseState
+class_name AttackState
 
 @export var wait_time : float = 1.0
 @onready var attack_timer : Timer = Timer.new()
@@ -15,12 +16,11 @@ func enter() -> void:
 	
 
 ######## LOGIC ########
-
 func _attack() -> void:
 	if actor.get_target() != null:
 		actor.get_target().hit(actor.damage)
 
-######## EMITS ########
 
+######## EMITS ########
 func _on_attack_timer_timeout() -> void:
 	_attack()

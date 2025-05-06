@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://btwbwr3eqfjk8" path="res://Scenes/tower.tscn" id="1_ldf1b"]
 [ext_resource type="Texture2D" uid="uid://c0rosbt6kix3e" path="res://Assets/Factions/Goblins/Buildings/Wood_House/Goblin_House.png" id="2_d2h14"]
-[ext_resource type="Script" path="res://Scripts/Enemies/e_tower.gd" id="2_ygf76"]
+[ext_resource type="Script" uid="uid://dcavs8r63al58" path="res://Scripts/Enemies/e_tower.gd" id="2_ygf76"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abnrq"]
 size = Vector2(96, 128)
