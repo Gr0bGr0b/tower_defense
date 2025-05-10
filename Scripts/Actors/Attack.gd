@@ -14,6 +14,11 @@ func enter() -> void:
 	super()
 	attack_timer.start()
 	
+func process(detal: float) -> Node2D:
+	if actor.get_target() == null:
+		return states.Move
+	return self
+	
 
 ######## LOGIC ########
 func _attack() -> void:

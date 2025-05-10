@@ -1,5 +1,5 @@
 class_name Actor
-extends Node2D
+extends CharacterBody2D
 
 
 @onready var state_machine	 	= $StateMachine
@@ -12,6 +12,7 @@ extends Node2D
 @export var damage: int = 10
 
 signal animation_changed(anim: String)
+signal died
 
 var animation : String = "" : set = set_animation, get = get_animation
 var direction : Vector2 = Vector2.ZERO: set = set_direction, get = get_direction
@@ -35,11 +36,13 @@ func set_direction(value) -> void:
 func get_direction() -> Vector2:
 		return direction
 
-func set_target(value) -> void:
+func set_target(value: Node2D = null) -> void:
 	if value != target:
 		target = value
+		if target != null:
+			target.connect("died", Callable(self,"_on_target_died"))
 
-func get_target():
+func get_target() -> Node2D:
 	return target
 	
 func set_health(value: int) -> void:
@@ -70,9 +73,21 @@ func _process(delta):
 func hit(damage: int) -> void:
 	set_health(get_health() - damage)
 	if get_health() <= 0:
-		queue_free()
+		_died()
 
-
+func _died() -> void:
+	queue_free()
+	emit_signal("died")
+	
 ######## SIGNALS ########
 func _on_animation_changed(anim: String):
 	animation_player.play(anim)
+	
+func _on_target_died() -> void:
+	# Only check fore areas has normally no enemies can be 
+	# on the same position
+	target.disconnect("died", Callable(self, "_on_target_died"))
+	if atk_area_detection.has_overlapping_areas():
+		set_target(atk_area_detection.get_overlapping_areas()[0])
+	else:
+		set_target(null)

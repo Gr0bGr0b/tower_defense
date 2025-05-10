@@ -551,7 +551,7 @@ script = ExtResource("3_du6dt")
 units_scn = Array[PackedScene]([ExtResource("4_wakao")])
 
 [node name="SpawnTimer" type="Timer" parent="World/Enemies"]
-wait_time = 10.17
+wait_time = 3.0
 autostart = true
 
 [node name="EnemiesTower" parent="World/Enemies" instance=ExtResource("3_d5e80")]
