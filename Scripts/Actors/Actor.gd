@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var atk_area_detection		= $AttackArea2D
 @onready var animation_player	= $AnimationPlayer
 @onready var sprite 			= $Sprite2D
+@onready var health_bar : TextureProgressBar = $Control/HealthBar
 
 @export var speed : float =  150.0 
 @export var health: int = 20 : set = set_health, get = get_health
@@ -13,6 +14,7 @@ extends CharacterBody2D
 
 signal animation_changed(anim: String)
 signal died
+signal health_changed(health: int)
 
 var animation : String = "" : set = set_animation, get = get_animation
 var direction : Vector2 = Vector2.ZERO: set = set_direction, get = get_direction
@@ -31,7 +33,6 @@ func get_animation() -> String:
 func set_direction(value) -> void:
 		if value != direction && value != Vector2.ZERO:
 			direction = value
-			emit_signal("direction_changed", value)
 			
 func get_direction() -> Vector2:
 		return direction
@@ -48,12 +49,14 @@ func get_target() -> Node2D:
 func set_health(value: int) -> void:
 	if health != value:
 		health = value
+		emit_signal("health_changed", health)
 
 func get_health() -> int:
 	return health
 
 ######## BUILT-IN ########
 func _ready() -> void:
+	self.health_changed.connect(_on_health_changed)
 	self.animation_changed.connect(_on_animation_changed)
 	state_machine.init(self)
 	
@@ -91,3 +94,6 @@ func _on_target_died() -> void:
 		set_target(atk_area_detection.get_overlapping_areas()[0])
 	else:
 		set_target(null)
+
+func _on_health_changed(health: int) -> void:
+	health_bar.set_value(health)

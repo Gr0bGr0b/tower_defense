@@ -1,20 +1,20 @@
 extends BaseState
 class_name AttackState
 
-@export var wait_time : float = 1.0
-@onready var attack_timer : Timer = Timer.new()
+@export var hit_frame: int 
 
-func _ready() -> void:
-	super()
-	add_child(attack_timer)
-	attack_timer.set_wait_time(wait_time)
-	attack_timer.timeout.connect(_on_attack_timer_timeout)
+var can_attack : bool = false
 
 func enter() -> void:
 	super()
-	attack_timer.start()
+
+func process(delta: float) -> Node2D:
+	if actor.sprite.get_frame() == hit_frame and can_attack:
+		_attack()
 	
-func process(detal: float) -> Node2D:
+	if actor.sprite.get_frame() != hit_frame:
+		can_attack = true
+		
 	if actor.get_target() == null:
 		return states.Move
 	return self
@@ -22,10 +22,6 @@ func process(detal: float) -> Node2D:
 
 ######## LOGIC ########
 func _attack() -> void:
+	can_attack = false
 	if actor.get_target() != null:
 		actor.get_target().hit(actor.damage)
-
-
-######## EMITS ########
-func _on_attack_timer_timeout() -> void:
-	_attack()

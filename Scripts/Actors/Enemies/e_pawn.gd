@@ -4,8 +4,7 @@ func _ready():
 	super()
 	add_to_group("Enemies")
 	set_direction(Vector2.LEFT)
-
-
+	
 ######## EMITS ########
 
 func _on_atk_area_entered(node) -> void:
