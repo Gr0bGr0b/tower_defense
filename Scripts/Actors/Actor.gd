@@ -56,14 +56,16 @@ func get_health() -> int:
 
 ######## BUILT-IN ########
 func _ready() -> void:
+	health_bar.max_value = get_health()
 	self.health_changed.connect(_on_health_changed)
 	self.animation_changed.connect(_on_animation_changed)
-	state_machine.init(self)
-	
 	atk_area_detection.connect("area_entered", Callable(self, "_on_atk_area_entered"))
 	atk_area_detection.connect("area_exited", Callable(self, "_on_atk_area_exited"))
 	atk_area_detection.connect("body_entered", Callable(self, "_on_atk_area_entered"))
 	atk_area_detection.connect("body_exited", Callable(self, "_on_atk_area_exited"))
+	
+	state_machine.init(self)
+	
 	
 func _physics_process(delta):
 	state_machine.physics_process(delta)

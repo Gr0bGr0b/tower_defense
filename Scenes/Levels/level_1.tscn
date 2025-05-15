@@ -109,6 +109,9 @@ offset_right = 318.0
 offset_bottom = 584.0
 metadata/_edit_group_ = true
 
+[node name="PawnBtnTimer" type="Timer" parent="LevelCanvas/UI/Container"]
+wait_time = 2.0
+
 [node name="PawnBtn" type="Button" parent="LevelCanvas/UI/Container"]
 layout_mode = 2
 disabled = true
