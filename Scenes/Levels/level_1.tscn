@@ -82,7 +82,6 @@ position = Vector2(896, 480)
 
 [node name="BlueTower" parent="World/Soldiers" instance=ExtResource("2_5ym7g")]
 position = Vector2(64, 480)
-script = null
 
 [node name="UnitsContainer" type="Node2D" parent="World/Soldiers"]
 position = Vector2(64, 480)

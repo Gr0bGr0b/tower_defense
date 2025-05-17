@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://pnsm65w5j06f"]
+[gd_scene load_steps=5 format=3 uid="uid://pnsm65w5j06f"]
 
 [ext_resource type="PackedScene" uid="uid://btwbwr3eqfjk8" path="res://Scenes/tower.tscn" id="1_f7ub7"]
 [ext_resource type="Texture2D" uid="uid://h4k85ljm2nqe" path="res://Assets/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="2_40qml"]
+[ext_resource type="Script" uid="uid://d3s1g28hwbf2f" path="res://Scripts/Actors/Soldiers/P_tower.gd" id="2_iksi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iksi2"]
+size = Vector2(128, 160)
 
 [node name="BlueTower" instance=ExtResource("1_f7ub7")]
+script = ExtResource("2_iksi2")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_40qml")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_iksi2")
 
 [node name="Control" parent="." index="2"]
 offset_right = 0.0
