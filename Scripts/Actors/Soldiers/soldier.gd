@@ -1,5 +1,5 @@
 extends Actor
-class_name PawnSoldier
+class_name Soldier
 
 func _ready():
 	super()

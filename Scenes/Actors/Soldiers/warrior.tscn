@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://uqr6hdyn3u40"]
+
+[ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_agtep"]
+[ext_resource type="Script" uid="uid://u76wwb642afn" path="res://Scripts/Actors/Soldiers/soldier.gd" id="2_7dy6d"]
+[ext_resource type="Texture2D" uid="uid://dho4yrct43ixe" path="res://Assets/Factions/Knights/Troops/Warrior_Blue.png" id="2_7yvwj"]
+[ext_resource type="Script" uid="uid://b4ryccpq2ebqo" path="res://Scripts/Actors/Move.gd" id="3_57qab"]
+[ext_resource type="Script" uid="uid://iahy5ps5ok2u" path="res://Scripts/Actors/Attack.gd" id="4_7dy6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yvwj"]
+size = Vector2(64, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvulf"]
+size = Vector2(18, 50)
+
+[sub_resource type="Animation" id="Animation_7dy6d"]
+resource_name = "Attack"
+length = 1.00001
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.250968, 0.333333, 0.416666, 0.503762, 0.584558, 0.667853, 0.752231, 0.837386, 0.918518),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 12, 15, 16, 17, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_c3ahp"]
+resource_name = "Move"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_yjgyb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3ahp"]
+_data = {
+&"Attack": SubResource("Animation_7dy6d"),
+&"Move": SubResource("Animation_c3ahp"),
+&"RESET": SubResource("Animation_yjgyb")
+}
+
+[node name="Warrior" instance=ExtResource("1_agtep")]
+script = ExtResource("2_7dy6d")
+health = 30
+damage = 15
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -32)
+texture = ExtResource("2_7yvwj")
+hframes = 6
+vframes = 8
+frame = 13
+
+[node name="Move" type="Node2D" parent="StateMachine" index="0"]
+script = ExtResource("3_57qab")
+metadata/_custom_type_script = "uid://b4ryccpq2ebqo"
+
+[node name="Attack" type="Node2D" parent="StateMachine" index="1"]
+script = ExtResource("4_7dy6d")
+hit_frame = 15
+metadata/_custom_type_script = "uid://iahy5ps5ok2u"
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_7yvwj")
+debug_color = Color(9.14484e-07, 0.643616, 0.296723, 0.42)
+
+[node name="AttackArea2D" parent="." index="3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="AttackArea2D" index="0"]
+position = Vector2(55, -25)
+shape = SubResource("RectangleShape2D_jvulf")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_c3ahp")
+}
+
+[node name="HealthBar" parent="Control" index="0"]
+offset_left = -50.0
+offset_top = -123.0
+offset_right = 50.0
+offset_bottom = -93.0
