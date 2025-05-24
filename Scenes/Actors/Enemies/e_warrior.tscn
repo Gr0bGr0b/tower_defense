@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://th652pars03b"]
+
+[ext_resource type="PackedScene" uid="uid://bmrothkjtqiqs" path="res://Scenes/Actors/actors.tscn" id="1_ymu64"]
+
+[node name="RedWarrior" instance=ExtResource("1_ymu64")]
